@@ -1,0 +1,36 @@
+---
+cmd: "powershell -ExecutionPolicy Bypass"
+name: build
+args:
+  - "./scripts/build.ps1"
+  - "-mod %modName%"
+  - "-srcDirectory %srcDir%"
+  - "-sdkPath %sdkPath%"
+  - "-gamePath %gamePath%"
+sh: true
+env:
+  modName: "'LWOTC_AlienPack'"                                                                         # your mod's name - this shouldn't have spaces or special characters, and it's usually the name of the first directory inside your mod's source dir
+  srcDir: "'E:/Users/Tyler/Documents/Documents/Workspace/code/LWOTC_AlienPack/'"  # the path that contains your mod's .XCOM_sln
+  sdkPath: "'E:/Program Files (x86)/Steam/SteamApps/common/XCOM 2 War of the Chosen SDK/'"                     # the path to your SDK installation ending in "XCOM 2 War of the Chosen SDK"
+  gamePath: "'E:/Program Files (x86)/Steam/SteamApps/steamapps/common/XCOM 2/'"                                          # the path to your XCOM 2 installation ending in "XCOM 2"
+targets:
+  run:
+    name: run
+    sh: true
+    cmd: "powershell -ExecutionPolicy Bypass"
+    args:
+      - "./scripts/run.ps1"
+      - "-gamePath %gamePath%"
+    env:
+      PSPath: "C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\powershell.exe"
+      gamePath: "'E:/Program Files (x86)/Steam/SteamApps/steamapps/common/XCOM 2/'"
+  open unreal editor:
+    name: open unreal editor
+    sh: true
+    cmd: "powershell -ExecutionPolicy Bypass"
+    args:
+      - "./scripts/runUnrealEditor.ps1"
+      - "-sdkPath %sdkPath%"
+    env:
+      PSPath: "C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\powershell.exe"
+sdkPath: "'E:/Program Files (x86)/Steam/SteamApps/common/XCOM 2 War of the Chosen SDK'"
